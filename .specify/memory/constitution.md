@@ -1,55 +1,86 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- SYNC IMPACT REPORT
+Version change: N/A → 1.0.0
+Modified principles: None (new constitution)
+Added sections: All sections
+Removed sections: None
+Templates requiring updates: ✅ updated - .specify/templates/plan-template.md, .specify/templates/spec-template.md, .specify/templates/tasks-template.md
+Follow-up TODOs: None
+-->
+# Todo App Evolution Constitution
+<!-- Hackathon II: From CLI to Cloud-Native AI Systems -->
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Spec-Driven Development (NON-NEGOTIABLE)
+No manual coding, specs first, Claude Code generates all code. All implementations must originate from specifications that are reviewed and validated before code generation.
+<!-- Rationale: Ensures consistent, predictable development process and enables AI-assisted development -->
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Iterative Evolution
+5 phases: Console → Web → AI Chatbot → Local K8s → Cloud. Each phase builds upon the previous one while maintaining backward compatibility where possible.
+<!-- Rationale: Enables progressive complexity addition while preserving working functionality -->
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Clean Architecture
+Separation of concerns, single responsibility, dependency injection. Business logic must be isolated from presentation and infrastructure layers.
+<!-- Rationale: Maintains code quality and testability across all phases of development -->
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Code Quality Standards
+PEP 8, type hints, max 30 lines/function, descriptive names. All code must follow established Python standards and maintain high readability.
+<!-- Rationale: Ensures maintainability and reduces cognitive load for developers -->
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Reusable Intelligence
+Claude Code skills/subagents in .claude/, version controlled. All AI-generated components must be stored in version control for reproducibility.
+<!-- Rationale: Creates institutional knowledge and enables reuse across projects -->
 
-### [PRINCIPLE_6_NAME]
+### VI. Cloud-Native Ready
+No hardcoded values, env vars, stateless, health checks, structured logging. Applications must be deployable in containerized environments from the start.
+<!-- Rationale: Enables seamless evolution to cloud deployments in later phases -->
 
+## Technology Stack
 
-[PRINCIPLE__DESCRIPTION]
+Phase I: Python 3.13+, UV, in-memory storage, CLI
+Phase II: + Next.js 16, FastAPI, SQLModel, Neon PostgreSQL, Better Auth/JWT
+Phase III: + OpenAI Agents SDK, MCP SDK, ChatKit, conversations DB
+Phase IV: + Docker, Minikube, Helm, kubectl-ai, kagent, Gordon
+Phase V: + Kafka/Redpanda, Dapr, Cloud K8s (DOKS/GKE/AKS), GitHub Actions
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Development Workflow
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Feature Cycle: Write spec → Claude reviews → Generate code → Test → Iterate on spec if needed
+Spec-Kit: /specify → /plan → /tasks → /implement
+Commits: <type>(<phase>): <description> (e.g., "feat(phase1): add task creation")
+Git: One repo, preserve old phases, tag completions (v1.0-phase1)
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Phase-Specific Guidelines
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Phase I: MVC (models.py, todo_manager.py, main.py), validate input, clear menus
+Phase II: Monorepo (frontend/, backend/), JWT auth, API in lib/api.ts, .env files
+Phase III: MCP server, stateless chat endpoint, persist conversations, ChatKit domain allowlist
+Phase IV: Multi-stage Dockerfiles, Helm charts, health endpoints, kubectl-ai for debugging
+Phase V: Kafka topics (task-events, reminders), Dapr components, microservices, CI/CD
+
+## Non-Negotiables
+
+- No manual code (spec-driven only)
+- No localStorage/sessionStorage
+- No hardcoded secrets
+- Auth required (Phase II+)
+- User data isolation
+- No print() in business logic
+- Env vars for config
+- Health checks
+- User-friendly errors
+
+## Testing
+
+Phase I: Manual checklist
+Phase II+: Automated tests (pytest, API tests)
+All tests from acceptance criteria
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Constitution = single source of truth
+CLAUDE.md = runtime guidance
+AGENTS.md = agent behavior
+Version traceability required
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-01-17 | **Last Amended**: 2025-01-17

@@ -1,4 +1,4 @@
-# Claude Code Rules
+# Claude Code Rules - Todo Application Project
 
 This file is generated during init for the selected agent.
 
@@ -13,6 +13,23 @@ You are an expert AI assistant specializing in Spec-Driven Development (SDD). Yo
 - Prompt History Records (PHRs) are created automatically and accurately for every user prompt.
 - Architectural Decision Record (ADR) suggestions are made intelligently for significant decisions.
 - All changes are small, testable, and reference code precisely.
+
+## Todo Application Project Overview
+
+You are building a todo application using spec-driven development across 5 phases in a monorepo architecture:
+
+**Phase I**: In-Memory Python Console App (Python, Claude Code, Spec-Kit Plus)
+- Objective: Build a command-line todo application that stores tasks in memory using the Agentic Dev Stack workflow: Write spec → Generate plan → Break into tasks → Implement via Claude Code. No manual coding allowed.
+- Requirements: Implement all 5 Basic Level features (Add, Delete, Update, View, Mark Complete)
+- Technology Stack: UV, Python 3.13+, Claude Code, Spec-Kit Plus
+- Deliverables: GitHub repository with constitution file, specs history folder containing all specification files, /src folder with Python source code, README.md with setup instructions, CLAUDE.md with Claude Code instructions
+
+**Phase II**: Full-Stack Web Application (Next.js, FastAPI, SQLModel, Neon DB)
+**Phase III**: AI-Powered Todo Chatbot (OpenAI ChatKit, Agents SDK, Official MCP SDK)
+**Phase IV**: Local Kubernetes Deployment (Docker, Minikube, Helm, kubectl-ai, kagent)
+**Phase V**: Advanced Cloud Deployment (Kafka, Dapr, DigitalOcean DOKS)
+
+Work sequentially through each phase, completing one before moving to the next. Follow spec-driven development practices using Claude Code and Spec-Kit Plus throughout the process.
 
 ## Core Guarantees (Product Promise)
 
