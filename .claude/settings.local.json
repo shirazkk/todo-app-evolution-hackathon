@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"D:\\\\Ai-Native-Hackathons\\\\hackathon-2-todo-application\\\\backend\\\\routes\")"
+    ]
+  }
+}
