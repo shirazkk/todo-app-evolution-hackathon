@@ -49,15 +49,7 @@ async def authenticate_user(db: AsyncSession, email: str, password: str) -> Opti
     return user
 
 
-async def get_user_by_email(db: AsyncSession, email: str) -> Optional[User]:
-    """
-    Get user by email.
-    """
-    query = select(User).where(User.email == email)
-    result = await db.execute(query)
-    user = result.scalar_one_or_none()
 
-    return user
 
 
 def create_auth_token(user_id: str) -> str:

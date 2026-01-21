@@ -43,10 +43,18 @@ async def get_current_user(
         raise credentials_exception
 
 
-# Actually, let's use the async version properly
-async def get_db_async() -> AsyncGenerator[AsyncSession, None]:
+
+def validate_user_authorization(
+    user_id: str,
+    current_user: User = Depends(get_current_user)
+) -> str:
     """
-    Get async database session for dependency injection.
+    Validate that the requested user_id matches the current authenticated user.
+    Returns the user_id if valid, raises 403 otherwise.
     """
-    async with get_db() as session:
-        yield session
+    if str(current_user.id) != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authorized to access resources for this user"
+        )
+    return user_id

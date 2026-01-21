@@ -68,7 +68,7 @@ Build a command-line todo application that stores tasks in memory using the Agen
 
 ## 🌐 **Phase 2: Full-Stack Web Application**
 
-**Status**: ✅ **COMPLETED**
+**Status**: 🔄 **IN PROGRESS / NOT COMPLETE YET**
 
 ### Objective
 Migrate from console app to a full-stack web application with authentication, database persistence, and REST API.
@@ -148,7 +148,7 @@ DELETE /api/users/{user_id}/todos/{todo_id} - Delete todo
 
 ## 🤖 **Phase 3: AI-Powered Todo Chatbot**
 
-**Status**: 🔄 **IN PROGRESS / NOT COMPLETE YET**
+**Status**: ❌ **NOT STARTED YET**
 
 ### Objective
 Integrate an AI chatbot that can understand natural language and help users manage their todos.

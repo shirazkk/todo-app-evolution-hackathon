@@ -16,10 +16,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 try:
     # Try to import from the actual app structure
     from app.database import Base
-    # Import models to register them with Base
-    # from app.models.user import User
-    # from app.models.todo import Todo
-    # from app.models.session import Session
+    # Import ALL models to register them with Base for autogenerate
+    from app.models.user import User
+    from app.models.todo import Todo
+    from app.models.session import Session
 except ImportError as e:
     print(f"Import error: {e}")
     # Fallback to defining Base for migration generation only
@@ -63,8 +63,7 @@ def run_migrations_offline() -> None:
             from app.config import settings
             url = settings.DATABASE_URL
         except:
-            # Fallback to a default URL for offline generation
-            url = "postgresql+asyncpg://user:password@localhost/dbname"
+            raise Exception("DATABASE_URL not found in settings")
 
     context.configure(
         url=url,
@@ -85,8 +84,7 @@ async def run_migrations_online() -> None:
         from app.config import settings
         database_url = settings.DATABASE_URL
     except:
-        # Fallback to environment variable
-        database_url = os.getenv("DATABASE_URL", "postgresql+asyncpg://user:password@localhost/dbname")
+        raise Exception("DATABASE_URL not found in settings")
 
     # Update the configuration dictionary
     configuration = config.get_section(config.config_ini_section)
