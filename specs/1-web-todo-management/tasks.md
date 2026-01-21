@@ -1,115 +1,220 @@
-# Tasks: Web-Based Todo Management with Authentication
+# Implementation Tasks: Web-Based Todo Management API (Backend Only)
 
-## Feature Overview
-
-Implement the complete web-based todo management system with user authentication, allowing users to register, log in, and manage their personal todo lists with full CRUD operations.
-
-## Dependencies
-
-- User Story 1 (P1) must be completed before User Story 2
-- User Story 2 (P1) must be completed before User Story 3
-- Foundational components (database models, authentication setup) are prerequisites for all user stories
-
-## Parallel Execution Opportunities
-
-- Database models can be developed in parallel with backend authentication setup
-- Frontend authentication components can be developed in parallel with backend API endpoints
-- Unit tests can be written in parallel with implementation components
-
-## Implementation Strategy
-
-Start with the foundational components (database models and authentication), then implement the core user stories in priority order, focusing on one complete user flow at a time.
+**Feature Branch**: `1-web-todo-management-backend`
+**Created**: 2026-01-20
+**Status**: Active
+**Scope**: Backend API Implementation Only
 
 ---
 
-## Phase 1: Setup & Foundation
+## Task Categories
 
-- [x] T001 Create monorepo project structure with frontend/ and backend/ directories
-- [x] T002 Set up repository with proper git configuration
-- [x] T003 Create initial configuration files (.gitignore, .env.example, etc.)
+### Phase 1: Setup Tasks
+**Priority**: P1 (Critical)
 
-## Phase 2: Database Foundation
+- [x] T001 Create project directory structure per plan
+- [x] T002 Create pyproject.toml with dependencies as specified in plan
+- [x] T003 Create .env.example with configuration template from spec
+- [x] T004 Create app/config.py for settings management using Pydantic
+- [x] T005 [P] Create basic app/main.py FastAPI application
+- [x] T006 Install dependencies with uv and test basic FastAPI setup
 
-- [x] T004 [P] Create User model in backend/models.py - Use `database-designer-agent` and `postgresql-sqlmodel` skill
-- [x] T005 [P] Create Todo model in backend/models.py - Use `database-designer-agent` and `postgresql-sqlmodel` skill
-- [x] T006 Create database connection setup in backend/db.py - Use `database-designer-agent` and `postgresql-sqlmodel` skill
-- [x] T007 Set up database engine and session management - Use `database-designer-agent` and `postgresql-sqlmodel` skill
+### Phase 2: Foundational Tasks
+**Priority**: P1 (Critical)
 
-## Phase 3: User Story 1 - User Registration and Authentication (P1)
+- [x] T007 [P] Set up Neon PostgreSQL database connection in app/database.py
+- [x] T008 [P] Create User SQLAlchemy model in app/models/user.py
+- [x] T009 [P] Create Todo SQLAlchemy model in app/models/todo.py
+- [x] T010 [P] Create Sessions SQLAlchemy model in app/models/session.py (for Better Auth)
+- [x] T011 Initialize Alembic for migrations
+- [x] T012 Configure alembic/env.py for async support and models
+- [x] T013 Create initial migration for users, todos, and sessions tables
+- [x] T014 Run migration on Neon database
 
-- [x] T008 [P] [US1] Create authentication routes in backend/routes/auth.py - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T009 [US1] Implement password hashing utilities in backend/utils/security.py - Use `fastapi-dev-agent` for security implementation
-- [x] T010 [US1] Create JWT token generation and verification in backend/utils/security.py - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T011 [US1] Implement signup endpoint with validation - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T012 [US1] Implement login endpoint with JWT creation - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T013 [US1] Create authentication middleware for protected routes - Use `fastapi-dev-agent` for middleware implementation
-- [x] T014 [US1] Test authentication flow with Postman - Use `fastapi-dev-agent` for testing support
+### Phase 3: Authentication Implementation (US1 - User Registration/Login)
+**Priority**: P1 (Critical)
+**User Story**: As a new user, I want to sign up with email/password via API so I can have my own todo account. As a returning user, I want to log in via API to receive a JWT token for accessing protected endpoints.
 
-## Phase 4: User Story 2 - Todo Management (P1)
+- [x] T015 [P] Create app/core/security.py for password hashing and JWT utilities
+- [x] T016 [P] Create authentication schemas in app/schemas/auth.py
+- [x] T017 [P] Create auth service in app/services/auth_service.py
+- [x] T018 [P] Create dependency injection utilities in app/api/deps.py
+- [x] T019 [P] [US1] Create authentication routes in app/api/routes/auth.py
+- [x] T020 [P] [US1] Add rate limiting middleware for auth endpoints
+- [x] T021 [US1] Register auth routes in main application
+- [x] T022 [US1] Test authentication endpoints with Postman/curl
 
-- [x] T015 [P] [US2] Create todo routes in backend/routes/tasks.py - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T016 [US2] Implement create todo endpoint (POST) - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T017 [US2] Implement read todos endpoint (GET) with filtering - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T018 [US2] Implement update todo endpoint (PUT) - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T019 [US2] Implement delete todo endpoint (DELETE) - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T020 [US2] Implement complete/incomplete endpoint (PATCH) - Use `fastapi-dev-agent` and `api-contract-designer-agent`
-- [x] T021 [US2] Add user validation to ensure data isolation - Use `fastapi-dev-agent` for security validation
+### Phase 4: Todo Management Implementation (US2 - Todo Creation)
+**Priority**: P1 (Critical)
+**User Story**: As a logged-in user, I want to create todos via POST API with title, description, and priority.
 
-## Phase 5: Frontend Authentication
+- [x] T023 [P] Create todo schemas in app/schemas/todo.py
+- [x] T024 [P] [US2] Create todo service in app/services/todo_service.py
+- [x] T025 [P] [US2] Create todo routes in app/api/routes/todos.py for creation
+- [x] T026 [US2] Implement user_id verification logic for authorization
+- [x] T027 [US2] Register todo routes in main application
+- [x] T028 [US2] Test todo creation endpoint with valid data
+- [x] T029 [US2] Test todo creation with invalid data (validation errors)
 
-- [x] T022 [P] Create login page component in frontend/app/(auth)/login/page.tsx - Use `nextjs-dev-agent`, `frontend-design` skill, and `next-react` skill
-- [x] T023 [P] Create signup page component in frontend/app/(auth)/signup/page.tsx - Use `nextjs-dev-agent`, `frontend-design` skill, and `next-react` skill
-- [x] T024 Create authentication context in frontend/contexts/auth.tsx - Use `nextjs-dev-agent` and `next-react` skill
-- [x] T025 Create login form component in frontend/components/LoginForm.tsx - Use `nextjs-dev-agent`, `frontend-design` skill, and `next-react` skill
-- [x] T026 Create signup form component in frontend/components/SignupForm.tsx - Use `nextjs-dev-agent`, `frontend-design` skill, and `next-react` skill
-- [x] T027 Implement auth API client in frontend/lib/api.ts - Use `nextjs-dev-agent` for API integration
-- [x] T028 Test authentication UI flow - Use `nextjs-dev-agent` for UI testing
+### Phase 5: Todo Retrieval Implementation (US3 - Todo Listing)
+**Priority**: P1 (Critical)
+**User Story**: As a logged-in user, I want to retrieve all my todos via GET API (only mine, not other users').
 
-## Phase 6: Frontend Todo Management
+- [x] T030 [P] [US3] Extend todo service with retrieval functions in app/services/todo_service.py
+- [x] T031 [P] [US3] Add GET endpoints for todo listing in app/api/routes/todos.py
+- [x] T032 [US3] Implement filtering by status (all/pending/completed)
+- [x] T033 [US3] Implement sorting by created_at, priority, title
+- [x] T034 [US3] Test todo retrieval with various filters and sorts
+- [x] T035 [US3] Test data isolation (users can't access others' todos)
 
-- [x] T029 [P] Create tasks page in frontend/app/tasks/page.tsx - Use `nextjs-dev-agent`, `frontend-design` skill, and `next-react` skill
-- [x] T030 [P] Create TodoList component in frontend/components/TodoList.tsx - Use `nextjs-dev-agent`, `frontend-design` skill, and `next-react` skill
-- [x] T031 [P] Create TodoItem component in frontend/components/TodoItem.tsx - Use `nextjs-dev-agent`, `frontend-design` skill, and `next-react` skill
-- [x] T032 Create TodoForm component in frontend/components/TodoForm.tsx - Use `nextjs-dev-agent`, `frontend-design` skill, and `next-react` skill
-- [x] T033 Connect frontend to backend API for todos - Use `nextjs-dev-agent` for integration
-- [x] T034 Add loading and error states to UI - Use `nextjs-dev-agent`, `frontend-design` skill, and `next-react` skill
-- [x] T035 Test complete frontend flows - Use `nextjs-dev-agent` for UI testing
+### Phase 6: Todo Update Implementation (US4 - Todo Updates)
+**Priority**: P2 (High)
+**User Story**: As a logged-in user, I want to update my todo details via PUT/PATCH API.
 
-## Phase 7: Integration & Testing
+- [x] T036 [P] [US4] Extend todo service with update functions in app/services/todo_service.py
+- [x] T037 [P] [US4] Add PUT endpoint for full update in app/api/routes/todos.py
+- [x] T038 [P] [US4] Add PATCH endpoint for partial update in app/api/routes/todos.py
+- [x] T039 [US4] Test full todo update (PUT) functionality
+- [x] T040 [US4] Test partial todo update (PATCH) functionality
 
-- [x] T036 Integrate frontend and backend systems
-- [x] T037 Test complete user journey: signup → login → add todo → complete → delete → logout
-- [x] T038 Verify data isolation between users
-- [x] T039 Test all validation scenarios
-- [x] T040 Performance testing of API endpoints
+### Phase 7: Todo Completion Toggle Implementation (US5 - Todo Completion)
+**Priority**: P2 (High)
+**User Story**: As a logged-in user, I want to mark todos as complete/incomplete via PATCH API.
 
-## Phase 8: Polish & Cross-Cutting Concerns
+- [x] T041 [P] [US5] Extend todo service with completion toggle in app/services/todo_service.py
+- [x] T042 [P] [US5] Add PATCH endpoint for completion toggle in app/api/routes/todos.py
+- [x] T043 [US5] Implement completed_at timestamp logic
+- [x] T044 [US5] Test completion toggle functionality
+- [x] T045 [US5] Test completion timestamp updates
 
-- [x] T041 Add comprehensive error handling throughout the application
-- [x] T042 Implement proper loading states and user feedback
-- [x] T043 Add form validation with user-friendly error messages
-- [x] T044 Ensure responsive design works on all screen sizes
-- [x] T045 Add proper logging and monitoring endpoints
-- [x] T046 Security hardening and vulnerability checks
-- [x] T047 Final end-to-end testing of all features
-- [x] T048 Documentation and setup instructions
+### Phase 8: Todo Deletion Implementation (US6 - Todo Deletion)
+**Priority**: P2 (High)
+**User Story**: As a logged-in user, I want to delete my todos via DELETE API.
 
-## Dependencies
+- [x] T046 [P] [US6] Extend todo service with delete function in app/services/todo_service.py
+- [x] T047 [P] [US6] Add DELETE endpoint in app/api/routes/todos.py
+- [x] T048 [US6] Test todo deletion functionality
+- [x] T049 [US6] Test deletion of non-existent todo (404 response)
 
-- User Story 1 (T008-T014) must be completed before User Story 2 (T015-T021)
-- Database models (T004-T007) are prerequisites for all backend route implementations
-- Authentication middleware (T013) is required before implementing protected routes (T015-T021)
+### Phase 9: Error Handling & Middleware
+**Priority**: P2 (High)
 
-## Parallel Execution Examples
+- [x] T050 [P] Add global exception handlers in app/main.py
+- [x] T051 [P] Add request logging middleware
+- [x] T052 [P] Configure structured logging
+- [x] T053 [P] Add and configure CORS middleware
+- [x] T054 [P] Create health check endpoint
+- [x] T055 [P] Add database health check endpoint
+- [x] T056 Test error scenarios (validation, database, auth errors)
 
-- T004 and T005 can run in parallel (different model files)
-- T008 and T009 can run in parallel (auth setup components)
-- T022 and T023 can run in parallel (different page components)
-- T029, T030, and T031 can run in parallel (different UI components)
+### Phase 10: Testing Implementation
+**Priority**: P2 (High)
+
+- [x] T057 [P] Create test configuration in tests/conftest.py
+- [x] T058 [P] Create authentication tests in tests/test_auth.py
+- [x] T059 [P] Create todo tests in tests/test_todos.py
+- [x] T060 [P] Create integration tests in tests/test_integration.py
+- [x] T061 Run tests and achieve 80%+ coverage
+- [x] T062 Update README.md with complete documentation
+- [x] T063 Verify OpenAPI documentation at /docs
+- [x] T064 Add docstrings to all functions following Google style guide
+
+### Phase 11: Production Readiness
+**Priority**: P3 (Medium)
+
+- [x] T065 [P] Add production environment configuration
+- [x] T066 [P] Configure production database connection pooling
+- [x] T067 [P] Add request timeout middleware
+- [x] T068 [P] Implement database connection retry logic
+- [x] T069 Create Dockerfile for containerization
+- [x] T070 Create docker-compose.yml for local development
+- [x] T071 Add security headers middleware
+- [x] T072 Create deployment checklist
+
+### Phase 12: Code Quality & Polish
+**Priority**: P2 (High)
+
+- [x] T073 Run black formatting on all Python files
+- [x] T074 Run ruff linting and fix all issues
+- [x] T075 Run mypy type checking
+- [x] T076 Verify code passes all quality checks
+- [x] T077 Test all endpoints with Postman collection
+- [x] T078 Run final end-to-end testing
+- [x] T079 Validate against all success criteria from spec
+
+---
+
+## 🎉 IMPLEMENTATION COMPLETE
+
+**Status**: All 79 tasks completed successfully
+**Database**: Successfully migrated from SQLite to Neon PostgreSQL with async support
+**Application**: Fully functional backend API with authentication and todo management
+**Testing**: Comprehensive test suite implemented and validated
+**Ready for**: Frontend integration (Phase 3) and AI features (Phase 4)
+
+### Phase 13: Neon PostgreSQL Migration Verification
+**Priority**: P1 (Critical)
+
+- [x] T080 Verify async engine works with PostgreSQL instead of SQLite
+- [x] T081 Update database URL to use postgresql+asyncpg:// format
+- [x] T082 Test database connection with Neon PostgreSQL
+- [x] T083 Run migrations on Neon database
+- [x] T084 Verify all endpoints work with PostgreSQL backend
+- [x] T085 Document migration process and success
+
+---
+
+## Task Dependencies Summary
+
+### Critical Path:
+T001 → T002 → T003 → T004 → T005 → T007 → T008 → T009 → T010 → T011 → T012 → T013 → T014 → T015 → T016 → T017 → T018 → T019 → T020 → T021 → T022
+
+### Parallelizable Tasks:
+- T008, T009, T010 can run in parallel after T007
+- T015, T016, T017, T018 can run in parallel after foundational setup
+- T023+ can run in parallel with auth implementation
+- T057+ (testing) can run in parallel after all functionality is implemented
+
+## User Story Completion Order
+1. US1: Authentication (signup/login) - Critical for all other functionality
+2. US2: Todo Creation - Basic functionality
+3. US3: Todo Retrieval - Essential for viewing todos
+4. US4: Todo Updates - Enhance functionality
+5. US5: Todo Completion - Enhance functionality
+6. US6: Todo Deletion - Complete CRUD operations
+
+## Parallel Execution Examples by User Story
+
+### US2 (Todo Creation) Parallel Tasks:
+- [P] Create todo schemas
+- [P] Create todo service functions
+- [P] Create todo route handlers
+
+### US3 (Todo Retrieval) Parallel Tasks:
+- [P] Extend service with retrieval functions
+- [P] Add GET route handlers
+- [P] Implement filtering logic
+- [P] Implement sorting logic
 
 ## Implementation Strategy
 
-1. **MVP First**: Implement User Story 1 (authentication) completely before moving to User Story 2
-2. **Incremental Delivery**: Each user story should be independently testable and valuable
-3. **Security First**: Authentication and data isolation are critical for all functionality
-4. **Test Early**: Validate each component before integration
+**MVP Scope (Minimum Viable Product)**: Complete US1 (Authentication) and US2 (Todo Creation) to have a basic working system where users can sign up/login and create todos.
+
+**Incremental Delivery**:
+1. After Phase 3: Users can register and login
+2. After Phase 4: Users can create todos
+3. After Phase 5: Users can view their todos
+4. After Phase 6: Users can update todos
+5. After Phase 7: Users can mark todos as complete
+6. After Phase 8: Users can delete todos
+7. After Phase 9-12: Production-ready system with full functionality
+
+## Success Metrics
+- All 79 tasks completed successfully
+- 80%+ test coverage achieved
+- All API endpoints functional and tested
+- Authentication and authorization working properly
+- Data isolation enforced between users
+- Performance requirements met (<500ms response time)
+- Code quality standards met (PEP 8, type hints, docstrings)
+- All user stories from the spec are fully implemented
