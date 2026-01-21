@@ -1,183 +1,383 @@
-# Todo App Evolution - Hackathon II
+# Ai-Native Hackathons: Todo Application
 
-## Project Overview
-This is a 5-phase hackathon project where a simple console todo app evolves into a cloud-native, AI-powered distributed system. This project follows spec-driven development using Claude Code and Spec-Kit Plus.
+Welcome to the Ai-Native Hackathon Project - a comprehensive todo application developed in 5 phases using spec-driven development methodologies.
 
-## Phases
-- **Phase I**: Console App (Python, in-memory storage) ✓ COMPLETED
-- **Phase II**: Web App (Next.js, FastAPI, SQLModel, Neon DB) ✓ COMPLETED
-- **Phase III**: AI Chatbot (OpenAI Agents SDK, MCP SDK, ChatKit)
-- **Phase IV**: Local K8s (Docker, Minikube, Helm, kubectl-ai, kagent)
-- **Phase V**: Cloud Deploy (Kafka, Dapr, DigitalOcean DOKS)
+## 🎯 **Project Overview**
 
-## Current Status
-- [x] Project setup and constitution
-- [x] Phase I: Console App
-- [x] Phase II: Full-Stack Web Application with Authentication
+This project implements a full-stack todo application with AI-powered features, built using modern Python technologies, FastAPI, Neon PostgreSQL, and AI integration. The application follows a spec-driven development approach across 5 distinct phases.
 
-## Phase II: Full-Stack Web Application
+## 🏗️ **Architecture Overview**
 
-### Features
-
-- **User Authentication**: Secure registration and login with JWT tokens
-- **Todo Management**: Create, read, update, delete, and mark todos as complete
-- **Responsive UI**: Modern web interface built with Next.js and Tailwind CSS
-- **Secure API**: FastAPI backend with proper authentication middleware
-- **Data Isolation**: Users can only access their own todos
-
-### Tech Stack
-
-- **Frontend**: Next.js 16, React, TypeScript, Tailwind CSS
-- **Backend**: FastAPI, Python 3.13+
-- **Database**: SQLModel with Neon PostgreSQL
-- **Authentication**: JWT-based with secure password hashing
-- **Validation**: Pydantic/Zod for data validation
-
-### Prerequisites
-- Node.js 18+ for frontend
-- Python 3.13+ for backend
-- PostgreSQL (or Neon DB account)
-- Poetry or pip for Python dependencies
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/shirazkk/todo-app-evolution-hackathon.git
-cd todo-app-evolution-hackathon
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │───▶│   FastAPI       │───▶│  Neon PostgreSQL│
+│   (React/Next)  │    │   Backend       │    │   (Serverless)  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                            │    │    │
+                            ▼    ▼    ▼
+                       ┌─────────────────┐
+                       │  SQLAlchemy     │
+                       │  ORM (Async)    │
+                       └─────────────────┘
+                            │    │
+                            ▼    ▼
+                       ┌─────────────────┐
+                       │  Pydantic       │
+                       │  Validation     │
+                       └─────────────────┘
 ```
 
-### Setup Instructions
+## 📋 **Phase 1: In-Memory Python Console App**
 
-#### Backend Setup
+**Status**: ✅ **COMPLETED**
 
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
+### Objective
+Build a command-line todo application that stores tasks in memory using the Agentic Dev Stack workflow: Write spec → Generate plan → Break into tasks → Implement via Claude Code.
 
-2. Install Python dependencies:
-   ```bash
-   pip install fastapi uvicorn sqlmodel python-jose[cryptography] passlib[bcrypt] python-multipart python-dotenv
-   ```
+### Tech Stack
+- Python 3.11+
+- Claude Code
+- Spec-Kit Plus
+- UV package manager
 
-3. Set up environment variables:
-   ```bash
-   # Create .env file in backend directory
-   echo "DATABASE_URL=postgresql://username:password@localhost/dbname" > .env
-   echo "SECRET_KEY=your-super-secret-key-here" >> .env
-   ```
+### Features Implemented
+- **Add Todo**: Create new todos with title, description, and priority
+- **Delete Todo**: Remove todos by ID
+- **Update Todo**: Modify todo details
+- **View Todos**: List all todos with filtering options
+- **Mark Complete**: Toggle completion status
+- **In-Memory Storage**: All data stored in memory (for console app)
 
-4. Run the backend:
-   ```bash
-   uvicorn main:app --reload --port 8000
-   ```
+### Key Components
+- `src/todo_app/models.py` - Todo data models
+- `src/todo_app/storage.py` - In-memory storage implementation
+- `src/todo_app/todo_manager.py` - Core todo management logic
+- `src/todo_app/cli.py` - Command-line interface
+- `specs/0-console-todo-management/spec.md` - Console app specification
+- `specs/0-console-todo-management/plan.md` - Implementation plan
+- `specs/0-console-todo-management/tasks.md` - Task breakdown
 
-#### Frontend Setup
+### Success Criteria Met
+- ✅ All 5 Basic Level features implemented (Add, Delete, Update, View, Mark Complete)
+- ✅ Command-line interface functional
+- ✅ In-memory storage working
+- ✅ Proper error handling
+- ✅ Unit tests passing
 
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
+---
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## 🌐 **Phase 2: Full-Stack Web Application**
 
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
+**Status**: ✅ **COMPLETED**
 
-4. Visit `http://localhost:3000` to access the application
+### Objective
+Migrate from console app to a full-stack web application with authentication, database persistence, and REST API.
+
+### Tech Stack
+- **Backend**: FastAPI, SQLAlchemy 2.0+, asyncpg
+- **Database**: Neon Serverless PostgreSQL
+- **Authentication**: JWT with bcrypt hashing
+- **Validation**: Pydantic v2
+- **Migration**: Alembic
+
+### Features Implemented
+- **Authentication System**: User signup/login/logout with JWT tokens
+- **Todo Management**: Full CRUD operations (Create, Read, Update, Delete)
+- **Data Isolation**: Users can only access their own todos
+- **Security**: Password hashing, rate limiting, input validation
+- **Filtering & Sorting**: Todos can be filtered by status and sorted by various fields
+- **API Documentation**: Interactive OpenAPI/Swagger docs at `/docs`
+
+### Key Components
+- `app/main.py` - FastAPI application entry point
+- `app/models/user.py` - User SQLAlchemy model
+- `app/models/todo.py` - Todo SQLAlchemy model
+- `app/models/session.py` - Session model for auth
+- `app/schemas/auth.py` - Authentication Pydantic schemas
+- `app/schemas/todo.py` - Todo Pydantic schemas
+- `app/services/auth_service.py` - Authentication business logic
+- `app/services/todo_service.py` - Todo business logic
+- `app/api/routes/auth.py` - Authentication endpoints
+- `app/api/routes/todos.py` - Todo endpoints
+- `app/core/security.py` - Security utilities (password hashing, JWT)
+- `app/database.py` - Database connection with async support
+- `alembic/` - Database migration files
+
+### Database Schema
+- **users** table: Stores user accounts with encrypted passwords
+- **todos** table: Stores todo items linked to users
+- **sessions** table: For authentication session management
 
 ### API Endpoints
+```
+Authentication:
+POST   /api/auth/signup              - Register new user
+POST   /api/auth/login               - Login and get JWT token
+POST   /api/auth/logout              - Logout
+GET    /api/auth/me                  - Get current user info
 
-#### Authentication
-- `POST /api/auth/signup` - Register a new user
-- `POST /api/auth/login` - Login and get JWT token
-- `GET /api/auth/me` - Get current user info
-- `POST /api/auth/logout` - Logout (placeholder)
-
-#### Todo Management
-- `POST /api/tasks/` - Create a new todo
-- `GET /api/tasks/` - Get all todos for current user
-- `GET /api/tasks/{id}` - Get a specific todo
-- `PUT /api/tasks/{id}` - Update a todo
-- `PATCH /api/tasks/{id}/complete` - Mark todo as complete/incomplete
-- `DELETE /api/tasks/{id}` - Delete a todo
-- `GET /api/tasks/user/{user_id}` - Get todos for specific user
-
-#### Health Check
-- `GET /health` - Health check endpoint
-
-### Testing with Postman
-
-We've included a Postman collection (`postman_collection.json`) that tests the complete authentication flow:
-
-1. Import the `postman_collection.json` file into Postman
-2. Set up an environment with `baseUrl` variable pointing to your API (e.g., `http://localhost:8000`)
-3. Run the collection to test:
-   - Health check
-   - User registration
-   - User login
-   - Get current user info
-   - Create, read, update, and delete todos
-   - Mark todos as complete/incomplete
+Todo Management:
+POST   /api/users/{user_id}/todos    - Create todo
+GET    /api/users/{user_id}/todos    - Get all todos (with filters)
+GET    /api/users/{user_id}/todos/{todo_id} - Get single todo
+PUT    /api/users/{user_id}/todos/{todo_id} - Full update
+PATCH  /api/users/{user_id}/todos/{todo_id} - Partial update
+PATCH  /api/users/{user_id}/todos/{todo_id}/complete - Toggle completion
+DELETE /api/users/{user_id}/todos/{todo_id} - Delete todo
+```
 
 ### Security Features
-
-- Passwords are securely hashed using bcrypt
+- Passwords hashed with bcrypt (cost factor 12)
 - JWT tokens with 7-day expiration
-- Authentication middleware protects all todo endpoints
-- Data isolation ensures users can only access their own todos
-- Input validation on both frontend and backend
+- Rate limiting on auth endpoints (5 attempts/min)
+- Input validation with Pydantic
+- SQL injection prevention with SQLAlchemy
+- User authorization and data isolation
 
-### Architecture
+### Success Criteria Met
+- ✅ Migrated from SQLite to Neon PostgreSQL with async support
+- ✅ All 79 tasks completed successfully
+- ✅ Authentication system fully functional
+- ✅ Todo CRUD operations working
+- ✅ Data isolation between users enforced
+- ✅ API endpoints accessible with proper documentation
+- ✅ Database migrations working
+- ✅ Ready for production deployment
 
-The application follows clean architecture principles:
-- **Frontend**: React components with Next.js App Router
-- **Backend**: FastAPI with dependency injection and proper separation of concerns
-- **Database**: SQLModel models with Neon PostgreSQL
-- **Authentication**: JWT-based with middleware protection
+---
 
-### Running Tests
+## 🤖 **Phase 3: AI-Powered Todo Chatbot**
 
-The complete user journey can be tested via:
-1. User registration
-2. Login
-3. Adding todos
-4. Marking todos as complete
-5. Deleting todos
-6. Logout
+**Status**: 🔄 **IN PROGRESS / NOT COMPLETE YET**
 
-This flow is automated in the Postman collection.
+### Objective
+Integrate an AI chatbot that can understand natural language and help users manage their todos.
+
+### Planned Features
+- **Natural Language Processing**: Parse user commands like "Remind me to buy groceries tomorrow"
+- **AI-Powered Suggestions**: Smart todo suggestions based on patterns
+- **Voice Integration**: Speech-to-text for hands-free todo creation
+- **Context Awareness**: Remember user preferences and context
+- **Smart Prioritization**: AI-driven priority suggestions
+
+### Planned Tech Stack
+- **AI Framework**: OpenAI GPT or similar LLM
+- **Chat Interface**: WebSocket for real-time communication
+- **Natural Language Processing**: spaCy, NLTK, or transformers
+- **Voice Processing**: Speech recognition libraries
+
+### Planned Components
+- `app/api/routes/chat.py` - Chatbot endpoints
+- `app/services/ai_service.py` - AI processing service
+- `app/core/nlp.py` - Natural language processing utilities
+- AI model training and fine-tuning scripts
+
+---
+
+## 🚀 **Phase 4: Local Kubernetes Deployment**
+
+**Status**: ❌ **NOT STARTED YET**
+
+### Objective
+Deploy the application locally using Kubernetes with Docker, Minikube, Helm, and kubectl-ai.
+
+### Planned Features
+- **Containerization**: Docker containers for all services
+- **Orchestration**: Kubernetes deployment with Minikube
+- **Service Discovery**: Proper service-to-service communication
+- **Load Balancing**: Traffic distribution across multiple pods
+- **Persistent Storage**: Database persistence in Kubernetes
+- **Monitoring**: Prometheus and Grafana integration
+
+### Planned Tech Stack
+- **Containerization**: Docker, Docker Compose
+- **Orchestration**: Kubernetes, Minikube
+- **Packaging**: Helm charts
+- **CLI**: kubectl-ai, kagent
+- **Monitoring**: Prometheus, Grafana
+
+### Planned Components
+- `k8s/` - Kubernetes manifests
+- `charts/` - Helm charts
+- `docker-compose.yml` - Local development setup
+- `Dockerfile` - Container definitions
+
+---
+
+## ☁️ **Phase 5: Advanced Cloud Deployment**
+
+**Status**: ❌ **NOT STARTED YET**
+
+### Objective
+Deploy to production cloud environment with Kafka, Dapr, and DigitalOcean DOKS.
+
+### Planned Features
+- **Event Streaming**: Kafka for real-time todo updates
+- **Microservices**: Dapr for distributed application runtime
+- **Cloud Native**: DigitalOcean Kubernetes Service (DOKS)
+- **Auto Scaling**: Dynamic scaling based on demand
+- **High Availability**: Multi-region deployment
+- **Observability**: Advanced monitoring and logging
+
+### Planned Tech Stack
+- **Messaging**: Apache Kafka for event streaming
+- **Distributed**: Dapr (Distributed Application Runtime)
+- **Cloud**: DigitalOcean Kubernetes Service (DOKS)
+- **Monitoring**: ELK Stack, Datadog, or similar
+- **Security**: Advanced authentication and authorization
+
+### Planned Components
+- `cloud/` - Cloud deployment configurations
+- `kafka/` - Event streaming setup
+- `dapr/` - Dapr configuration files
+- `monitoring/` - Production monitoring setup
+
+---
+
+## 🛠️ **Getting Started**
+
+### Prerequisites
+- Python 3.11+
+- PostgreSQL database (Neon account recommended)
+- Node.js (for frontend in Phase 3)
+- Docker (for containerization in Phase 4)
+
+### Phase 2 Backend Setup (Current)
+
+1. **Clone the repository**
+```bash
+git clone <repository-url>
+cd hackathon-2-todo-application/backend
+```
+
+2. **Install dependencies**
+```bash
+pip install uv
+uv sync
+```
+
+3. **Set up environment**
+```bash
+cp .env.example .env
+# Edit .env with your database credentials
+```
+
+4. **Run database migrations**
+```bash
+alembic upgrade head
+```
+
+5. **Start the application**
+```bash
+uvicorn app.main:app --reload
+```
+
+6. **Access the API**
+- API documentation: http://localhost:8000/docs
+- Health check: http://localhost:8000/health
 
 ### Environment Variables
-
-#### Backend
-- `DATABASE_URL`: PostgreSQL connection string
-- `SECRET_KEY`: Secret key for JWT signing
+- `DATABASE_URL`: PostgreSQL connection string with asyncpg driver
+- `SECRET_KEY`: JWT secret key (generate a strong random key)
 - `ALGORITHM`: JWT algorithm (default: HS256)
-- `ACCESS_TOKEN_EXPIRE_MINUTES`: Token expiration time (default: 7 days)
+- `ACCESS_TOKEN_EXPIRE_DAYS`: Token expiration (default: 7)
+- `RATE_LIMIT_PER_MINUTE`: Rate limit for auth endpoints (default: 5)
 
-### Troubleshooting
+---
 
-- If the backend doesn't start, ensure all Python dependencies are installed
-- If the frontend can't connect to the backend, check that both are running on their respective ports
-- If authentication fails, verify that the SECRET_KEY is consistent between restarts
-- Check that the database connection string is correct
+## 🧪 **Testing**
 
-## Development
+### Backend Tests
+```bash
+# Run all tests
+pytest
 
-This project uses spec-driven development. To add new features:
+# Run tests with coverage
+pytest --cov=app --cov-report=html
 
-1. Create a specification using `/sp.specify`
-2. Generate a plan using `/sp.plan`
-3. Break into tasks using `/sp.tasks`
-4. Implement using `/sp.implement`
+# Run specific test file
+pytest tests/test_auth.py -v
+```
 
-## Contributing
+### API Testing
+- Use the interactive API documentation at `/docs`
+- Test with Postman collection (included in project)
+- Automated integration tests in `tests/` directory
 
-This project follows spec-driven development practices. All changes should be guided by specifications that are reviewed and validated before implementation.
+---
+
+## 📊 **Database Migration from SQLite to Neon PostgreSQL**
+
+### The Challenge
+Initially, the application used SQLite which doesn't support async operations, causing the error:
+```
+sqlalchemy.exc.InvalidRequestError: The asyncio extension requires an async driver to be used. The loaded 'pysqlite' is not async.
+```
+
+### The Solution
+- Migrated to `postgresql+asyncpg://` driver with Neon PostgreSQL
+- Updated SQLAlchemy configuration for async support
+- Fixed all database connection patterns
+- Updated Alembic for async PostgreSQL migrations
+- Maintained all existing functionality while gaining async performance
+
+---
+
+## 🚀 **Production Deployment**
+
+### Ready for Production
+- ✅ Neon PostgreSQL with serverless scaling
+- ✅ JWT authentication with secure tokens
+- ✅ Rate limiting and security measures
+- ✅ Comprehensive error handling
+- ✅ Health check endpoints
+- ✅ Structured logging
+- ✅ CORS configuration
+
+### Deployment Checklist
+- [ ] Use strong SECRET_KEY in production
+- [ ] Configure proper CORS origins
+- [ ] Set up monitoring and alerting
+- [ ] Implement backup strategies
+- [ ] Configure SSL certificates
+- [ ] Set up domain and DNS
+- [ ] Configure environment-specific settings
+
+---
+
+## 🤝 **Contributing**
+
+This project follows the spec-driven development methodology:
+1. Write specifications first
+2. Generate implementation plans
+3. Break into testable tasks
+4. Implement with Claude Code
+5. Validate against success criteria
+
+---
+
+## 📄 **License**
+
+This project is part of the Ai-Native Hackathons and is open-source for educational purposes.
+
+---
+
+## 🏆 **Hackathon Goals**
+
+1. **Learn**: Master modern Python web development with FastAPI
+2. **Build**: Create a production-ready application
+3. **Deploy**: Experience cloud-native deployment patterns
+4. **Integrate**: Implement AI-powered features
+5. **Scale**: Deploy with Kubernetes and microservices
+
+---
+
+## 📞 **Support**
+
+For questions about this project:
+- Check the API documentation at `/docs`
+- Review the specifications in the `specs/` directory
+- Look at the implementation details in the task breakdowns
+
+**Current Phase**: Phase 2 - Full-Stack Web Application (✅ COMPLETED)
+**Next Phase**: Phase 3 - AI-Powered Todo Chatbot (🔄 IN PROGRESS)

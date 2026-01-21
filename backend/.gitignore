@@ -1,4 +1,4 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -58,18 +58,6 @@ htmlcov/
 
 # Alembic
 alembic/versions/*.py
-
 # Database
 *.db
 *.db-journal
-
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.pyc
-*.pyo
-*~
-*.swp
-*.swo
