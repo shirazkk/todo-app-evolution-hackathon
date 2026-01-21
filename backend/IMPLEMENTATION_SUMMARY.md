@@ -15,7 +15,7 @@ The full-stack todo application backend has been successfully implemented and mi
 ### **Phase 2: Database Migration (SQLite → Neon PostgreSQL)**
 - ✅ **Root Cause Identified**: `sqlalchemy.exc.InvalidRequestError: The asyncio extension requires an async driver to be used. The loaded 'pysqlite' is not async.`
 - ✅ **Solution Implemented**: Migrated from SQLite to Neon PostgreSQL with asyncpg driver
-- ✅ **Database URL**: `postgresql+asyncpg://neondb_owner:npg_tmi1bGjKro8L@ep-damp-math-ahd3ipbg-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require`
+- ✅ **Database URL**: `url`
 - ✅ **Async SQLAlchemy 2.0+**: Proper async engine with `create_async_engine`
 - ✅ **Connection Pooling**: Configured for production with Neon PostgreSQL
 
