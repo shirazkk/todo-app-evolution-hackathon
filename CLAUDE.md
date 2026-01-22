@@ -225,3 +225,6 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## AGENTS.md Integration
+See `AGENTS.md` for specialized agent configurations that work with SpecKit Plus for enhanced development workflows. Reference AGENTS.md for agent-specific instructions and capabilities when using Claude Code with the SpecKit Plus framework.

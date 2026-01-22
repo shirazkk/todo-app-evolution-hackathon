@@ -45,7 +45,7 @@ Phase V: + Kafka/Redpanda, Dapr, Cloud K8s (DOKS/GKE/AKS), GitHub Actions
 
 ## Development Workflow
 
-Feature Cycle: Write spec → Claude reviews → Generate code → Test → Iterate on spec if needed
+Feature Cycle: Write spec → Claude reviews → create plan → create tasks → implement code → Test → Iterate on spec if needed
 Spec-Kit: /specify → /plan → /tasks → /implement
 Commits: <type>(<phase>): <description> (e.g., "feat(phase1): add task creation")
 Git: One repo, preserve old phases, tag completions (v1.0-phase1)
