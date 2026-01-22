@@ -19,14 +19,14 @@ This task breakdown represents how to implement the frontend todo application fo
 **Timeline**: Days 1-2
 **Dependencies**: None
 
-- [ ] T001 Initialize Next.js 16+ project with TypeScript and Tailwind CSS
+- [ ] T001 Initialize Next.js 16+ project with TypeScript and Tailwind CSS using this command `npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-map --legacy-peer-deps`
 - [ ] T002 Set up project structure following Next.js App Router conventions
-- [ ] T003 Configure environment variables and .env.local file
-- [ ] T004 Install and configure shadcn/ui components
+- [ ] T003 create example environment variables and .env.example file
+- [ ] T004 Install and configure shadcn/ui components using this command `npx shadcn@latest add [component-name]`
 - [ ] T005 Set up TypeScript configuration with strict mode
-- [ ] T006 Install and configure React Query (TanStack Query) for data management
-- [ ] T007 Install and configure Zod for form validation
-- [ ] T008 Install and configure Axios for HTTP requests
+- [ ] T006 Install and configure React Query (TanStack Query) for data management using this command `npm install @tanstack/react-query`
+- [ ] T007 Install and configure Zod for form validation using this command `npm install zod`
+- [ ] T008 Install and configure Axios for HTTP requests using this command `npm install axios`
 - [ ] T009 Set up ESLint and Prettier with appropriate configurations
 - [ ] T010 Create initial README with setup instructions
 
@@ -46,7 +46,7 @@ This task breakdown represents how to implement the frontend todo application fo
 - [ ] T017 Set up React Query cache configuration in hooks/useApiCache.ts
 - [ ] T018 Create global layout and theme configuration
 - [ ] T019 Implement Next.js middleware for route protection
-- [ ] T020 Create base UI components (Button, Input, Card, LoadingSpinner) in components/ui/
+- [ ] T020 install shadcn base UI components (Button, Input, Card, LoadingSpinner) in components/ui/
 
 ---
 
@@ -66,7 +66,7 @@ As a new user, I want to be able to sign up for an account so that I can access 
 - [ ] T023 [P] [US1] Create AuthGuard component for protected routes in components/auth/AuthGuard.tsx
 - [ ] T024 [US1] Implement login page in app/(auth)/login/page.tsx
 - [ ] T025 [US1] Implement signup page in app/(auth)/signup/page.tsx
-- [ ] T026 [US1] Create API endpoints integration for authentication in lib/api.ts
+- [ ] T026 [US1] Create API endpoints integration for authentication in lib/api.ts to call backend auth API
 - [ ] T027 [US1] Implement form validation using Zod in auth forms
 - [ ] T028 [US1] Add loading and error states to auth forms
 - [ ] T029 [US1] Implement JWT token storage and retrieval in auth context
@@ -90,7 +90,7 @@ As an authenticated user, I want to create, read, update, and delete my todos so
 - [ ] T033 [P] [US2] Create TodoForm component in components/todos/TodoForm.tsx
 - [ ] T034 [P] [US2] Create TodoSkeleton component in components/todos/TodoSkeleton.tsx
 - [ ] T035 [US2] Create useTodos hook in hooks/useTodos.ts for todo operations
-- [ ] T036 [US2] Implement todo CRUD API integration in lib/api.ts
+- [ ] T036 [US2] Integrate with backend todo API in lib/api.ts to call todo endpoints
 - [ ] T037 [US2] Create todo dashboard page in app/dashboard/page.tsx
 - [ ] T038 [US2] Implement optimistic updates with React Query
 - [ ] T039 [US2] Add loading and error states to todo components
@@ -117,7 +117,7 @@ As an admin user, I want to view all users and their todos so that I can monitor
 - [ ] T046 [P] [US3] Create AdminGuard component in components/admin/AdminGuard.tsx
 - [ ] T047 [US3] Create admin login page in app/(admin)/admin-login/page.tsx
 - [ ] T048 [US3] Create admin dashboard page in app/(admin)/admin/page.tsx
-- [ ] T049 [US3] Implement admin API integration in lib/api.ts
+- [ ] T049 [US3] Implement admin functionality using Next.js API routes in lib/api.ts with environment variable verification
 - [ ] T050 [US3] Add environment variable verification for admin credentials
 - [ ] T051 [US3] Implement middleware protection for admin routes
 - [ ] T052 [US3] Create user detail view in app/(admin)/admin/users/[userId]/page.tsx

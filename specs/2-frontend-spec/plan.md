@@ -34,7 +34,7 @@ This plan outlines the implementation of a Next.js frontend for a todo applicati
 ### Integration Points
 - Existing backend API endpoints for authentication and todo operations in folder `/backend`
 - JWT token-based authentication system
-- Admin credential verification against environment variables
+- Admin credential verification against environment variables using Next.js API routes
 - Middleware for route protection
 
 ## Constitution Check
@@ -231,7 +231,7 @@ This plan outlines the implementation of a Next.js frontend for a todo applicati
 - [ ] Create user todos view component
 - [ ] Implement admin guard middleware
 - [ ] Add admin-specific UI elements
-- [ ] Implement environment variable verification
+- [ ] Implement environment variable verification using Next.js API routes
 
 ### Sprint 4: UI/UX Polish & Testing
 **Objective**: Enhance user experience and ensure quality
