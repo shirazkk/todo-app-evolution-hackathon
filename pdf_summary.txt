@@ -1,0 +1,23 @@
+Hackathon II: Spec-Driven Development - PDF Summary
+
+Based on the extracted content from the PDF, here's what I can see:
+
+1. Title: "Hackathon II: Spec-Driven Development"
+2. Subtitle: "The Evolution of Todo - Mastering Spec-Driven Development & Cloud Native AI"
+3. The document describes a hackathon project that evolves a simple todo application through 5 phases:
+   - Phase I: In-Memory Python Console App (Python, Claude Code, Spec-Kit Plus) - 100 points - Due Dec 7, 2025
+   - Phase II: Full-Stack Web Application (Next.js, FastAPI, SQLModel, Neon DB) - 150 points - Due Dec 14, 2025
+   - Phase III: AI-Powered Todo Chatbot (OpenAI ChatKit, Agents SDK, Official MCP SDK)
+   - Phase IV: Local Kubernetes Deployment (Docker, Minikube, Helm, kubectl-ai, kagent)
+   - Phase V: Advanced Cloud Deployment (Kafka, Dapr, DigitalOcean DOKS)
+
+The project focuses on:
+- Spec-driven development methodology
+- Using Claude Code for AI-assisted development
+- Progressive evolution from simple CLI app to complex cloud-native AI system
+- The document has 47 pages in total
+
+Key concepts mentioned:
+- Agentic Dev Stack (Write spec → Generate plan → Break into tasks → Implement via Claude Code)
+- No manual coding allowed - everything must be generated from specs
+- Building progressively complex software without writing boilerplate code
