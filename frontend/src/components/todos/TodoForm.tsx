@@ -1,8 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { useTodosContext } from '../../context/TodosContext';
-import { useAuth } from '../../context/AuthContext';
+import { motion } from 'framer-motion';
+import { useTodosContext } from '@/context/TodosContext';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Plus, X } from 'lucide-react';
 
 interface TodoFormProps {
   userId: string;
@@ -36,88 +42,126 @@ const TodoForm = ({ userId, onClose }: TodoFormProps) => {
 
       if (onClose) onClose();
     } catch (err: any) {
-      setError(err.message || 'Failed to create todo');
+      setError(err.message || 'Failed to create task');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">Create New Task</h3>
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden"
+    >
+      <Card className="bg-transparent border-0 shadow-none">
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white">Create New Task</CardTitle>
+            {onClose && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onClose}
+                className="h-8 w-8 p-0 text-slate-400 hover:text-white hover:bg-white/10"
+                aria-label="Close form"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
+        </CardHeader>
 
-      {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-red-600 text-sm">{error}</p>
-        </div>
-      )}
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {error && (
+              <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-300 text-sm">
+                {error}
+              </div>
+            )}
 
-      <div className="space-y-4">
-        <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
-            Title *
-          </label>
-          <input
-            id="title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-            placeholder="What needs to be done?"
-          />
-        </div>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="title" className="block text-sm font-medium text-slate-300 mb-2">
+                  Title *
+                </label>
+                <Input
+                  id="title"
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                  placeholder="What needs to be done?"
+                  className="bg-white/5 border-white/20 text-white placeholder-slate-400 focus:ring-cyan-500 focus:border-cyan-500"
+                />
+              </div>
 
-        <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
-            Description
-          </label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={3}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-            placeholder="Add details..."
-          />
-        </div>
+              <div>
+                <label htmlFor="description" className="block text-sm font-medium text-slate-300 mb-2">
+                  Description
+                </label>
+                <Textarea
+                  id="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Add details..."
+                  rows={3}
+                  className="bg-white/5 border-white/20 text-white placeholder-slate-400 focus:ring-cyan-500 focus:border-cyan-500 min-h-[100px]"
+                />
+              </div>
 
-        <div>
-          <label htmlFor="priority" className="block text-sm font-medium text-gray-700 mb-1">
-            Priority
-          </label>
-          <select
-            id="priority"
-            value={priority}
-            onChange={(e) => setPriority(e.target.value as 'high' | 'medium' | 'low')}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 bg-white"
-          >
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        </div>
-      </div>
+              <div>
+                <label htmlFor="priority" className="block text-sm font-medium text-slate-300 mb-2">
+                  Priority
+                </label>
+                <Select value={priority} onValueChange={(value: 'high' | 'medium' | 'low') => setPriority(value)}>
+                  <SelectTrigger className="bg-white/5 border-white/20 text-white focus:ring-cyan-500 focus:border-cyan-500">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-slate-800 border-white/20 text-white">
+                    <SelectItem value="low" className="text-slate-200">Low</SelectItem>
+                    <SelectItem value="medium" className="text-slate-200">Medium</SelectItem>
+                    <SelectItem value="high" className="text-slate-200">High</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
-      <div className="mt-6 flex justify-end space-x-3">
-        {onClose && (
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200"
-          >
-            Cancel
-          </button>
-        )}
-        <button
-          type="submit"
-          disabled={loading}
-          className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 transition-all duration-200"
-        >
-          {loading ? 'Creating...' : 'Create Task'}
-        </button>
-      </div>
-    </form>
+            <div className="flex justify-end space-x-3 pt-4">
+              {onClose && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={onClose}
+                  disabled={loading}
+                  className="border-white/20 text-slate-300 hover:text-white hover:bg-white/10"
+                >
+                  Cancel
+                </Button>
+              )}
+              <Button
+                type="submit"
+                disabled={loading}
+                className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white shadow-lg"
+              >
+                {loading ? (
+                  <div className="flex items-center">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Creating...
+                  </div>
+                ) : (
+                  <div className="flex items-center">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Create Task
+                  </div>
+                )}
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
 
