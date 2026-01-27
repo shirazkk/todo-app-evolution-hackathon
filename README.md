@@ -68,7 +68,7 @@ Build a command-line todo application that stores tasks in memory using the Agen
 
 ## 🌐 **Phase 2: Full-Stack Web Application**
 
-**Status**: 🔄 **IN PROGRESS / NOT COMPLETE YET**
+**Status**: ✅ **COMPLETED**
 
 ### Objective
 Migrate from console app to a full-stack web application with authentication, database persistence, and REST API.

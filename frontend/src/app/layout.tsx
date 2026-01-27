@@ -1,9 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "../hooks/useAuth";
-import { TodosProvider } from "../context/TodosContext";
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
+import { AuthProvider } from "@/hooks/useAuth";
+import { TodosProvider } from "@/context/TodosContext";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 
 const geistSans = Geist({
@@ -29,7 +29,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <TodosProvider>
-            <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+            <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
               <Navbar />
               <main className="pt-16">
                 {children}
